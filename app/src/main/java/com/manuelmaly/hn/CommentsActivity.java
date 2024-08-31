@@ -35,7 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.manuelmaly.hn.login.LoginActivity_;
+import com.manuelmaly.hn.login.LoginActivity;
 import com.manuelmaly.hn.model.HNComment;
 import com.manuelmaly.hn.model.HNCommentTreeNode;
 import com.manuelmaly.hn.model.HNPost;
@@ -369,7 +369,7 @@ public class CommentsActivity extends BaseListActivity implements
     }
 
     private void openArticleReader() {
-        Intent intent = new Intent(this, ArticleReaderActivity_.class);
+        Intent intent = new Intent(this, ArticleReaderActivity.class);
         intent.putExtra(CommentsActivity.EXTRA_HNPOST, mPost);
         if (getIntent().getStringExtra(
                 ArticleReaderActivity.EXTRA_HTMLPROVIDER_OVERRIDE) != null) {
@@ -551,7 +551,7 @@ public class CommentsActivity extends BaseListActivity implements
                 if (!mIsLoggedIn) {
                     setCommentToUpvote(mComment);
                     startActivityForResult(new Intent(getApplicationContext(),
-                            LoginActivity_.class), ACTIVITY_LOGIN);
+                            LoginActivity.class), ACTIVITY_LOGIN);
                 } else {
                     vote(mComment.getUpvoteUrl(Settings
                             .getUserName(CommentsActivity.this)), mComment);

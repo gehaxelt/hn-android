@@ -242,7 +242,7 @@ public class ArticleReaderActivity extends AppCompatActivity {
   }
 
   private void launchCommentsActivity() {
-    Intent i = new Intent( ArticleReaderActivity.this, CommentsActivity_.class );
+    Intent i = new Intent( ArticleReaderActivity.this, CommentsActivity.class );
     i.putExtra( CommentsActivity.EXTRA_HNPOST, mPost );
     if (getIntent().getStringExtra( EXTRA_HTMLPROVIDER_OVERRIDE ) != null) {
       i.putExtra( EXTRA_HTMLPROVIDER_OVERRIDE, getIntent().getStringExtra( EXTRA_HTMLPROVIDER_OVERRIDE ) );

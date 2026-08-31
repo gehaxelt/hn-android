@@ -62,7 +62,7 @@ android {
             props.load(new FileInputStream(rootProject.file("release.properties")))
 
             release {
-                storeFile new File(props.keyStore.toString())
+                storeFile project.file(props.keyStore.toString())
                 storePassword props.keyStorePassword
                 keyAlias props.keyAlias
                 keyPassword props.keyAliasPassword

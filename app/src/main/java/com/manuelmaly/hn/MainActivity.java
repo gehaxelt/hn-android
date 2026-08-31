@@ -247,6 +247,9 @@ public class MainActivity extends BaseListActivity implements
         }
         Settings.setNightMode(this, nextMode);
         AppCompatDelegate.setDefaultNightMode(nextMode);
+        // If the effective mode doesn't change the activity is not
+        // recreated, so re-prepare the menu to update the button state
+        supportInvalidateOptionsMenu();
         Toast.makeText(this, getString(getNightModeTitle(nextMode)),
                 Toast.LENGTH_SHORT).show();
     }

@@ -31,7 +31,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.content.AppCompatResources;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.view.MenuItemCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 

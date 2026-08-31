@@ -42,6 +42,18 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        // AndroidAnnotations cannot locate the manifest with modern AGP,
+        // so point it at the right file explicitly
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString(),
+                        // the manifest has no package attribute (AGP namespace),
+                        // so tell AndroidAnnotations where R lives
+                        "resourcePackageName": "com.manuelmaly.hn"
+                ]
+            }
+        }
     }
 
     signingConfigs {

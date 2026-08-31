@@ -3,17 +3,21 @@ package com.manuelmaly.hn.util;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.util.TypedValue;
 
 public final class ThemeHelper {
 
     private ThemeHelper() {
     }
 
+    /**
+     * AppCompat applies a forced night mode (MODE_NIGHT_YES / MODE_NIGHT_NO)
+     * by overriding the uiMode in the activity's resource configuration, so
+     * this also covers the forced modes, not only the system setting.
+     */
     public static boolean isNightMode(Context c) {
-        TypedValue nightMode = new TypedValue();
-        c.getTheme().resolveAttribute(android.R.attr.nightMode, nightMode, true);
-        return nightMode.data == Configuration.UI_MODE_NIGHT_YES;
+        return (c.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK)
+                == Configuration.UI_MODE_NIGHT_YES;
     }
 
     /**

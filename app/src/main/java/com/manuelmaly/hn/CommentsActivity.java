@@ -2,6 +2,8 @@ package com.manuelmaly.hn;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,6 +50,7 @@ import com.manuelmaly.hn.util.DisplayHelper;
 import com.manuelmaly.hn.util.FileUtil;
 import com.manuelmaly.hn.util.FontHelper;
 import com.manuelmaly.hn.util.SpotlightActivity;
+import com.manuelmaly.hn.util.ThemeHelper;
 import com.manuelmaly.hn.util.ViewedUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -466,6 +469,8 @@ public class CommentsActivity extends BaseListActivity implements
             if (comment.getTreeNode().getParent() != null){
                 mItems.add(getString(R.string.collapse_thread));
             }
+
+            mItems.add(getString(R.string.copy_comment));
         }
 
         @Override
@@ -569,7 +574,18 @@ public class CommentsActivity extends BaseListActivity implements
                 HNCommentTreeNode mRootNode = mComment.getTreeNode().getRootNode();
                 mComments.toggleCommentExpanded(mRootNode.getComment());
                 mCommentsListAdapter.notifyDataSetChanged();
-            }else {
+            } else if (clickedText.equals(getApplicationContext().getString(
+                    R.string.copy_comment))) {
+                // mComment.getText() is HTML, convert it to plain text
+                String text = Html.fromHtml(mComment.getText()).toString().trim();
+                ClipboardManager clipboard = (ClipboardManager)
+                        getApplicationContext().getSystemService(
+                                Context.CLIPBOARD_SERVICE);
+                clipboard.setPrimaryClip(ClipData.newPlainText(
+                        "HN Comment", text));
+                Toast.makeText(CommentsActivity.this, R.string.comment_copied,
+                        Toast.LENGTH_SHORT).show();
+            } else {
                 mComments.toggleCommentExpanded(mComment);
                 mCommentsListAdapter.notifyDataSetChanged();
             }
@@ -680,8 +696,10 @@ public class CommentsActivity extends BaseListActivity implements
         public void setComment(HNComment comment, int commentLevelIndentPx,
                 Context c, int commentTextSize, int metadataTextSize) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, commentTextSize);
-            textView.setTextColor(comment.getColor());
-            textView.setLinkTextColor(comment.getColor());
+            int commentColor = ThemeHelper.adaptCommentColor(
+                    comment.getColor(), c);
+            textView.setTextColor(commentColor);
+            textView.setLinkTextColor(commentColor);
             textView.setText(Html.fromHtml(comment.getText()));
             textView.setMovementMethod(LinkMovementMethod.getInstance());
             authorView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,
@@ -701,12 +719,18 @@ public class CommentsActivity extends BaseListActivity implements
                     .setVisibility(comment.getTreeNode().isExpanded() ? View.INVISIBLE
                             : View.VISIBLE);
             spacersContainer.removeAllViews();
+            boolean nightMode = ThemeHelper.isNightMode(c);
             for (int i = 0; i < comment.getCommentLevel(); i++) {
                 View spacer = new View(c);
                 spacer.setLayoutParams(new android.widget.LinearLayout.LayoutParams(
                         commentLevelIndentPx, LayoutParams.MATCH_PARENT));
                 int spacerAlpha = Math.max(70 - i * 10, 10);
-                spacer.setBackgroundColor(Color.argb(spacerAlpha, 0, 0, 0));
+                if (nightMode) {
+                    spacer.setBackgroundColor(Color.argb(spacerAlpha, 255, 255,
+                            255));
+                } else {
+                    spacer.setBackgroundColor(Color.argb(spacerAlpha, 0, 0, 0));
+                }
                 spacersContainer.addView(spacer, i);
             }
         }

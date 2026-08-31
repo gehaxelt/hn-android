@@ -39,9 +39,9 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/peach"
-        android:cacheColorHint="@color/peach"
-        android:divider="#f0dfce"
+        android:background="@color/settings_bg"
+        android:cacheColorHint="@color/settings_bg"
+        android:divider="@color/settings_divider"
         android:dividerHeight="1dp"
         android:fadingEdge="none" />
 

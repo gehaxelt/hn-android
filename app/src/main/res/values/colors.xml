@@ -10,4 +10,13 @@
     <color name="gray_post_title_read">#9a8e86</color>
     <color name="gray_article_title">#797979</color>
     <color name="gray_action_clicked">#979797</color>
+    <color name="main_list_divider">#f0dfce</color>
+    <color name="empty_text">#c3b5a7</color>
+    <color name="post_meta_text">#787067</color>
+    <color name="post_comments_bg">#fbe9d8</color>
+    <color name="post_comments_text">#716961</color>
+    <!-- Settings screen always uses the platform light theme, so it needs
+         fixed light colors that are not overridden in values-night -->
+    <color name="settings_bg">#ffeddb</color>
+    <color name="settings_divider">#f0dfce</color>
 </resources>

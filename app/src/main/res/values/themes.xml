@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ActionBar" parent="Theme.AppCompat">
+    <style name="ActionBar" parent="Theme.AppCompat.DayNight">
         <item name="android:actionOverflowButtonStyle">@style/OverflowIconStyle</item>
         <item name="actionOverflowButtonStyle">@style/OverflowIconStyle</item>
         <item name="android:homeAsUpIndicator">@drawable/back</item>
@@ -8,6 +8,8 @@
         <item name="actionBarItemBackground">@drawable/actionbar_button_bg</item>
         <item name="homeAsUpIndicator">@drawable/back</item>
         <item name="android:buttonStyle">@null</item>
+        <item name="android:statusBarColor">#7e3300</item>
+        <item name="colorPrimaryDark">#7e3300</item>
     </style>
 
     <style name="ActionBar.Orange" parent="ActionBar">

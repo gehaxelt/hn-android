@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="peach">#211d1b</color>
+    <color name="peach_dark">#2e2824</color>
+    <color name="gray_comments_information">#9c9186</color>
+    <color name="gray_comments_divider">#3d3630</color>
+    <color name="dark_gray_post_title">#ece5df</color>
+    <color name="gray_post_title_read">#6e645c</color>
+    <color name="gray_article_title">#b3b3b3</color>
+    <color name="main_list_divider">#322c28</color>
+    <color name="empty_text">#574f49</color>
+    <color name="post_meta_text">#a89e94</color>
+    <color name="post_comments_bg">#2b2521</color>
+    <color name="post_comments_text">#c9bfb4</color>
+</resources>

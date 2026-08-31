@@ -30,6 +30,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.content.AppCompatResources;
 import androidx.core.view.MenuItemCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -196,7 +198,57 @@ public class MainActivity extends BaseListActivity implements
             MenuItemCompat.setActionView(item, v);
         }
 
+        MenuItem nightModeItem = menu.findItem(R.id.menu_night_mode);
+        int nightMode = Settings.getNightMode(this);
+        nightModeItem.setIcon(AppCompatResources.getDrawable(this,
+                getNightModeIcon(nightMode)));
+        String nightModeTitle = getString(getNightModeTitle(nightMode));
+        nightModeItem.setTitle(nightModeTitle);
+        nightModeItem.setContentDescription(nightModeTitle);
+
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    private static int getNightModeIcon(int nightMode) {
+        switch (nightMode) {
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                return R.drawable.ic_theme_dark;
+            case AppCompatDelegate.MODE_NIGHT_NO:
+                return R.drawable.ic_theme_light;
+            default:
+                return R.drawable.ic_theme_auto;
+        }
+    }
+
+    private static int getNightModeTitle(int nightMode) {
+        switch (nightMode) {
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                return R.string.night_mode_dark;
+            case AppCompatDelegate.MODE_NIGHT_NO:
+                return R.string.night_mode_light;
+            default:
+                return R.string.night_mode_auto;
+        }
+    }
+
+    private void cycleNightMode() {
+        int currentMode = Settings.getNightMode(this);
+        int nextMode;
+        switch (currentMode) {
+            case AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM:
+                nextMode = AppCompatDelegate.MODE_NIGHT_YES;
+                break;
+            case AppCompatDelegate.MODE_NIGHT_YES:
+                nextMode = AppCompatDelegate.MODE_NIGHT_NO;
+                break;
+            default:
+                nextMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
+                break;
+        }
+        Settings.setNightMode(this, nextMode);
+        AppCompatDelegate.setDefaultNightMode(nextMode);
+        Toast.makeText(this, getString(getNightModeTitle(nextMode)),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -210,6 +262,9 @@ public class MainActivity extends BaseListActivity implements
             return true;
         case R.id.menu_refresh:
             startFeedLoading();
+            return true;
+        case R.id.menu_night_mode:
+            cycleNightMode();
             return true;
         default:
             return super.onOptionsItemSelected(item);

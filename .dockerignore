@@ -1,0 +1,7 @@
+.git
+.gradle
+artifacts
+local.properties
+*.apk
+.DS_Store
+app/build

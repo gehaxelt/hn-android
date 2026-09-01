@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 public class Settings {
     
     public static final String PREF_FONTSIZE = "pref_fontsize";
@@ -12,6 +14,7 @@ public class Settings {
     public static final String PREF_USER = "pref_user";
     public static final String PREF_REPORTING = "pref_crashlytics";
     public static final String PREF_PULLDOWNREFRESH = "pref_pulldownrefresh";
+    public static final String PREF_NIGHTMODE = "pref_nightmode";
     
     public static final String USER_DATA_SEPARATOR = ":";
     
@@ -33,6 +36,17 @@ public class Settings {
     public static boolean isPullDownRefresh(Context c) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(c);
         return sharedPref.getBoolean(PREF_PULLDOWNREFRESH, false);
+    }
+
+    public static int getNightMode(Context c) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+        return sharedPref.getInt(PREF_NIGHTMODE,
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+    }
+
+    public static void setNightMode(Context c, int nightMode) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+        sharedPref.edit().putInt(PREF_NIGHTMODE, nightMode).commit();
     }
 
     public static boolean isUserLoggedIn(Context c) {

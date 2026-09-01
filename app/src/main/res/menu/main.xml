@@ -3,6 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:hn="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/menu_night_mode"
+        android:icon="@drawable/ic_theme_auto"
+        android:title="@string/night_mode_auto"
+        hn:showAsAction="always" />
+
     <item android:id="@+id/menu_refresh"
         android:icon="@drawable/refresh"
         android:title="@string/refresh"

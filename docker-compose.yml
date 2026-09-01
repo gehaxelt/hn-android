@@ -1,0 +1,17 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hn-android-build:latest
+    # Cache dependency downloads between builds
+    volumes:
+      - gradle-cache:/root/.gradle
+      - m2-cache:/root/.m2
+      # APK + unit test results end up here
+      - ./artifacts:/output
+    command: bash -c "cp /artifacts/*.apk /output/ && cp -r /test-results /output/test-results && echo '--- artifacts ---' && ls -la /output"
+
+volumes:
+  gradle-cache:
+  m2-cache:

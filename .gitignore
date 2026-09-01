@@ -14,8 +14,10 @@ tmp/
 test_servers
 screenshot*
 *.apk
+artifacts/
 .gradle/
 build/
 .idea
 release.properties
 crashlytics.properties
+*.keystore
